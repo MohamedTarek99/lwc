@@ -1,0 +1,82 @@
+<template>
+    <lightning-card>
+        <lightning-input type="search" onchange={handleKeyChange} class="slds-m-left_small" label="Search" value={searchKey}></lightning-input>
+        <template if:true={branches.data}>
+            <legend class="slds-form-element__legend slds-form-element__label slds-m-left_small">{searchKey} Branches</legend>
+
+            <lightning-datatable
+            hide-checkbox-column="true"
+            class="slds-m-left_small"
+                key-field="Id"
+                data={branches.data.Branches__r}
+                columns={columns}
+            >
+           </lightning-datatable>
+           <fieldset class="slds-form-element slds-form-element_compound slds-form-element_address slds-m-left_small">
+            <legend class="slds-form-element__legend slds-form-element__label slds-m-left_small">Add new branch</legend>
+            <div class="slds-form-element__control slds-m-left_small">
+              <div class="slds-form-element__row">
+                <div class="slds-size_4-of-6">
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="form-element-id-01">Name</label>
+                    <div class="slds-form-element__control">
+                      <input id="form-element-id-01" required=""  class="slds-input" value={rec.Name} onchange={handleNameChange}></input>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form-element__row">
+                <div class="slds-size_2-of-6">
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="form-element-id-01">Street</label>
+                    <div class="slds-form-element__control">
+                      <input id="form-element-id-001" required="" class="slds-input" value={rec.Street__c} onchange={handleStreetChange}></input>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form-element__row">
+                <div class="slds-size_4-of-6">
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="form-element-id-02">City</label>
+                    <div class="slds-form-element__control">
+                      <input type="text" id="form-element-id-02" required="" class="slds-input" value={rec.City__c} onchange={handleCityChange}></input>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-size_2-of-6">
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="form-element-id-03">Building</label>
+                    <div class="slds-form-element__control">
+                      <input type="text" id="form-element-id-03" required="" class="slds-input" value={rec.Building__c} onchange={handleBuildingChange} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form-element__row">
+                <div class="slds-size_4-of-6">
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="form-element-id-04">Zip/Postal Code</label>
+                    <div class="slds-form-element__control">
+                      <input type="text" id="form-element-id-04" required="" class="slds-input" value={rec.Zip_Code__c} onchange={handleZipChange} />
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-size_2-of-6">
+                  <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="form-element-id-05">Drive Through</label>
+                    <div class="slds-form-element__control">
+                        <lightning-input type="checkbox" value={rec.Drive_Through__c} onchange={handleDriveChange}> </lightning-input>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <lightning-button label="Add" onclick={handleCreate}></lightning-button>
+            </div>
+
+          </fieldset>
+
+        </template>
+    </lightning-card>
+</template>

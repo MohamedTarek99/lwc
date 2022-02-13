@@ -1,0 +1,9 @@
+<template>
+    <template if:true={errors}>
+      status: {errors.status}<br />
+      statusText: {errors.statusText}<br />
+      <template for:each={errors.body} for:item="error">
+        statusText: {error.message}
+      </template>
+    </template>
+  </template>
