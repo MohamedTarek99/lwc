@@ -10,8 +10,43 @@
                 key-field="Id"
                 data={branches.data.Branches__r}
                 columns={columns}
+                onsave={handleSave}
+                draft-values={draftValues}
             >
            </lightning-datatable>
+           <lightning-button if:false={newRow} label="New" onclick={handleNew}></lightning-button>
+           <div if:true={newRow} class="sizing slds-grid slds-wrap">
+            <div class="slds-size_1-of-6">
+              <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small"><input id="form-element-id-1" required="" placeholder="Name" class="slds-input" value={record.Name} onchange={handleNameChange}></input>
+              </div>
+            </div>
+            <div class="slds-size_1-of-6">
+              <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small"><input type="text" id="form-element-id-3" required="" class="slds-input" placeholder="City" value={record.City__c} onchange={handleCityChange}></input></div>
+            </div>
+            <div class="slds-size_1-of-6">
+              <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small"><input id="form-element-id-2" required="" class="slds-input" placeholder="Street" value={record.Street__c} onchange={handleStreetChange}></input>   </div>
+            </div>
+            <div class="slds-size_1-of-6">
+              <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small"><input type="text" id="form-element-id-003" required="" class="slds-input" value={record.Building__c} placeholder="Building" onchange={handleBuildingChange} />
+              </div>
+            </div>
+            <div class="slds-size_1-of-6">
+              <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small"> <input type="text" id="form-element-id-004" required="" class="slds-input" placeholder="Zip" value={record.Zip_Code__c} onchange={handleZipChange} /></div>
+            </div>
+            <div class="slds-size_1-of-6">
+              <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small"><lightning-input type="checkbox" value={record.Drive_Through__c} onchange={handleDriveChange}> </lightning-input></div>
+            </div>
+            <ul class="slds-button-group-row">
+              <li class="slds-button-group-item">
+                <button class="slds-button slds-button_neutral" onclick={handleCancel}>Cancel</button>
+              </li>
+            
+              <li class="slds-button-group-item">
+                <button class="slds-button slds-button_brand" onclick={handleCreate}>Save</button>
+              </li>
+            </ul>
+          </div>
+     
            <fieldset class="slds-form-element slds-form-element_compound slds-form-element_address slds-m-left_small">
             <legend class="slds-form-element__legend slds-form-element__label slds-m-left_small">Add new branch</legend>
             <div class="slds-form-element__control slds-m-left_small">
@@ -20,7 +55,7 @@
                   <div class="slds-form-element">
                     <label class="slds-form-element__label" for="form-element-id-01">Name</label>
                     <div class="slds-form-element__control">
-                      <input id="form-element-id-01" required=""  class="slds-input" value={rec.Name} onchange={handleNameChange}></input>
+                      <input id="form-element-id-01" required=""  class="slds-input" value={record.Name} onchange={handleNameChange}></input>
                     </div>
                   </div>
                 </div>
@@ -30,7 +65,7 @@
                   <div class="slds-form-element">
                     <label class="slds-form-element__label" for="form-element-id-01">Street</label>
                     <div class="slds-form-element__control">
-                      <input id="form-element-id-001" required="" class="slds-input" value={rec.Street__c} onchange={handleStreetChange}></input>
+                      <input id="form-element-id-001" required="" class="slds-input" value={record.Street__c} onchange={handleStreetChange}></input>
                     </div>
                   </div>
                 </div>
@@ -40,7 +75,7 @@
                   <div class="slds-form-element">
                     <label class="slds-form-element__label" for="form-element-id-02">City</label>
                     <div class="slds-form-element__control">
-                      <input type="text" id="form-element-id-02" required="" class="slds-input" value={rec.City__c} onchange={handleCityChange}></input>
+                      <input type="text" id="form-element-id-02" required="" class="slds-input" value={record.City__c} onchange={handleCityChange}></input>
                     </div>
                   </div>
                 </div>
@@ -48,7 +83,7 @@
                   <div class="slds-form-element">
                     <label class="slds-form-element__label" for="form-element-id-03">Building</label>
                     <div class="slds-form-element__control">
-                      <input type="text" id="form-element-id-03" required="" class="slds-input" value={rec.Building__c} onchange={handleBuildingChange} />
+                      <input type="text" id="form-element-id-03" required="" class="slds-input" value={record.Building__c} onchange={handleBuildingChange} />
                     </div>
                   </div>
                 </div>
@@ -58,7 +93,7 @@
                   <div class="slds-form-element">
                     <label class="slds-form-element__label" for="form-element-id-04">Zip/Postal Code</label>
                     <div class="slds-form-element__control">
-                      <input type="text" id="form-element-id-04" required="" class="slds-input" value={rec.Zip_Code__c} onchange={handleZipChange} />
+                      <input type="text" id="form-element-id-04" required="" class="slds-input" value={record.Zip_Code__c} onchange={handleZipChange} />
                     </div>
                   </div>
                 </div>
@@ -66,7 +101,7 @@
                   <div class="slds-form-element">
                     <label class="slds-form-element__label" for="form-element-id-05">Drive Through</label>
                     <div class="slds-form-element__control">
-                        <lightning-input type="checkbox" value={rec.Drive_Through__c} onchange={handleDriveChange}> </lightning-input>
+                        <lightning-input type="checkbox" value={record.Drive_Through__c} onchange={handleDriveChange}> </lightning-input>
 
                     </div>
                   </div>
