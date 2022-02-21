@@ -1,4 +1,7 @@
+
 public with sharing class Task {
+  
+  // donot return null values return the default object value if the method has return statment
   @AuraEnabled(cacheable=true)
   public static Resturant__c getResturantByName(String Resturant) {
     Resturant__c[] resturantWithBranches = [
