@@ -57,6 +57,7 @@ const COLUMNS = [{
 
 ];
 const DELAY = 300;
+const EMPTY_STRING = '';
 const errorTitleMessage = 'An Error has occured!';
 const updateSuccessBodyMessage = 'Branches updated succesfully!'
 const insertSuccessBodyMessage = 'Branch added succesfully!'
@@ -123,13 +124,15 @@ export default class BranchList extends LightningElement {
     handleNew(event) {
         this.newRow = true
     }
+    
+    // replace '' with variable 
     handleCancel(event) {
-        this.record.Name = '';
-        this.record.Street__c = '';
-        this.record.Building__c = '';
-        this.record.Zip_Code__c = '';
+        this.record.Name = EMPTY_STRING;
+        this.record.Street__c = EMPTY_STRING;
+        this.record.Building__c = EMPTY_STRING;
+        this.record.Zip_Code__c = EMPTY_STRING;
         this.record.Drive_Through__c = false;
-        this.record.City__c = '';
+        this.record.City__c = EMPTY_STRING;
         this.newRow = false;
     }
     handleKeyChange(event) {
@@ -139,6 +142,10 @@ export default class BranchList extends LightningElement {
             this.searchKey = searchKey;
         }, DELAY);
     }
+    
+    // donot set value with undefined
+    
+    // donot use any repatitve code use methods and classes example: the toast behaviour 
     handleCreate() {
         console.log("record")
         this.record.Resturant__c = this.branches.data.Id
