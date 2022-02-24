@@ -1,0 +1,14 @@
+<template>
+    <div style="height: 300px;">
+        <lightning-input type="search" onchange={handleKeyChange} class="slds-m-bottom_small" label="Search" value={searchKey}></lightning-input>
+        <template if:true={earthquakes.data}>
+        <lightning-datatable
+                key-field="id"
+                data={earthquakes.data}
+                show-row-number-column
+                hide-checkbox-column
+                columns={columns}>
+        </lightning-datatable>
+        </template>
+    </div>
+</template>
